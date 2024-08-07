@@ -45,8 +45,8 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_filters",
     "rest_framework_simplejwt",
-    "drf_yasg",
-    # "drf_spectacular",
+    # "drf_yasg",
+    "drf_spectacular",
     "cars",
 ]
 
@@ -156,7 +156,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
-    # "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "COERCE_DECIMAL_TO_STRING": False,
 }
 
@@ -197,22 +197,30 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
 
-SWAGGER_SETTINGS = {
-    "SECURITY_DEFINITIONS": {
-        "JWT [Bearer {JWT}]": {
-            "name": "Authorization",
-            "type": "apiKey",
-            "in": "header",
-        }
-    },
-    # 'SECURITY_DEFINITIONS': {
-    #     'api_key': {
-    #         'type': 'apiKey',
-    #         'in': 'header',
-    #         'name': 'Authorization'
-    #     }
-    # },
-    "USE_SESSION_AUTH": False,
-}
+# SWAGGER_SETTINGS = {
+#     "SECURITY_DEFINITIONS": {
+#         "JWT [Bearer {JWT}]": {
+#             "name": "Authorization",
+#             "type": "apiKey",
+#             "in": "header",
+#         }
+#     },
+#     # 'SECURITY_DEFINITIONS': {
+#     #     'api_key': {
+#     #         'type': 'apiKey',
+#     #         'in': 'header',
+#     #         'name': 'Authorization'
+#     #     }
+#     # },
+#     "USE_SESSION_AUTH": False,
+# }
 
 FORCE_SCRIPT_NAME = "/"
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Your Project API",
+    "DESCRIPTION": "Your project description",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
+    # OTHER SETTINGS
+}

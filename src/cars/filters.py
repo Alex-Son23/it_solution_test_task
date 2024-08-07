@@ -2,7 +2,7 @@ import django_filters
 from .models import Car
 
 
-class CarsFilter(django_filters.FilterSet):
+class CarsFilter(django_filters.rest_framework.FilterSet):
     brand = django_filters.CharFilter(lookup_expr="icontains")
     model = django_filters.CharFilter(lookup_expr="icontains")
     year = django_filters.NumberFilter()
