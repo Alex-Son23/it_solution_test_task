@@ -3,7 +3,7 @@ from django.db import models
 
 class Car(models.Model):
     """
-    Модель машины, со следующими полями:
+    Модель машины, которая содержит следующие поля:
         Марка
         Модель
         Год выпуска
@@ -40,3 +40,9 @@ class Car(models.Model):
     )
     mileage = models.PositiveIntegerField(verbose_name="Пробег")
     price = models.DecimalField(decimal_places=2, max_digits=10, verbose_name="Цена")
+
+    def __str__(self) -> str:
+        return f"{self.brand} - {self.model}"
+
+    class Meta:
+        ordering = ["-id"]

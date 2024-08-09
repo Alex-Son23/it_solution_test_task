@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: test_task-db
+    image: postgres:latest
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  server:
+    container_name: test_task-api
+    build:
+      context: .
+      network: host
+      dockerfile: dockerfiles/Dockerfile
+    command: sh -c "python manage.py migrate && python manage.py collectstatic --noinput && python manage.py createsuperuser --noinput & gunicorn test_task.wsgi:application --bind 0.0.0.0:8000"
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    volumes:
+      - static:/www/data/static
+      - media:/www/data/media
+  nginx:
+    container_name: test_task-nginx
+    build: ./dockerfiles/nginx
+    ports:
+      - 443:443
+      - 80:80
+    depends_on:
+      - server
+    volumes:
+      - static:/www/data/static
+      - media:/www/data/media
+volumes:
+  pgdata:
+    name: test_task-pgdata
+  static:
+    name: test_task-static
+  media:
+    name: test_task-media

@@ -7,6 +7,8 @@ CURRENT_YEAR = datetime.now().year
 
 
 class CarSerializer(serializers.ModelSerializer):
+    """Сериализатор для модели Car"""
+
     brand = serializers.CharField(max_length=128)
     model = serializers.CharField(max_length=256)
     year = serializers.IntegerField(min_value=1886, max_value=CURRENT_YEAR)
@@ -34,6 +36,7 @@ class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
         fields = (
+            "id",
             "brand",
             "model",
             "year",

@@ -30,7 +30,9 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DJANGO_DEBUG_MODE").lower() == "true"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "*",
+]
 
 
 # Application definition
@@ -139,7 +141,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = os.getenv("DJANGO_STATIC_ROOT")
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static"),
+#     os.getenv("DJANGO_STATIC_ROOT"),
+# ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -215,7 +222,7 @@ SIMPLE_JWT = {
 #     "USE_SESSION_AUTH": False,
 # }
 
-FORCE_SCRIPT_NAME = "/"
+# FORCE_SCRIPT_NAME = "/"
 
 SPECTACULAR_SETTINGS = {
     "TITLE": "Your Project API",
@@ -224,3 +231,7 @@ SPECTACULAR_SETTINGS = {
     "SERVE_INCLUDE_SCHEMA": False,
     # OTHER SETTINGS
 }
+APPEND_SLASH = True
+
+
+DJANGO_MEDIA_ROOT = os.getenv("DJANGO_MEDIA_ROOT")

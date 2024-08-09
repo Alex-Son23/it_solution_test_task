@@ -23,13 +23,6 @@ services:
     depends_on:
       - db
     volumes:
-      - .:/evacode
+      - .:/test_task
     env_file:
       - .env
-volumes:
-  pgdata:
-    name: evacode-pgdata
-  static:
-    name: evacode-static
-  media:
-    name: evacode-media

@@ -3,6 +3,8 @@ from .models import Car
 
 
 class CarsFilter(django_filters.rest_framework.FilterSet):
+    """Фильтр для модели Cars"""
+
     brand = django_filters.CharFilter(lookup_expr="icontains")
     model = django_filters.CharFilter(lookup_expr="icontains")
     year = django_filters.NumberFilter()
