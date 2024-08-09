@@ -45,4 +45,6 @@ class Car(models.Model):
         return f"{self.brand} - {self.model}"
 
     class Meta:
+        verbose_name = "Машина"
+        verbose_name_plural = "Машины"
         ordering = ["-id"]

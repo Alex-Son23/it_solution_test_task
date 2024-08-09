@@ -6,19 +6,60 @@ from .filters import CarsFilter
 from .pagination import CustomPagination
 from rest_framework.exceptions import NotFound
 from rest_framework.response import Response
-from drf_spectacular.utils import extend_schema_view, extend_schema
+from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 
 
 @extend_schema_view(
     retrieve=extend_schema(
-        summary="Получение заявки на создание торговой сети.",
-        # parameters=[join_request_param],
+        summary="Получения данных о машине.",
     ),
     partial_update=extend_schema(
-        summary="Изменение заявки на создание торговой сети.",
-        # parameters=[join_request_param],
+        summary="Изменения данных о машине.",
     ),
-    list=extend_schema(summary="Получение списка заявок на создание торговой сети."),
+    list=extend_schema(
+        summary="Получение списка машин.",
+        description="Возвращает список машин с возможностью фильтрации по цене (минимальная и максимальная) и другим параметрам.",
+        parameters=[
+            OpenApiParameter(
+                name="price_min",
+                description="Минимальная цена",
+                required=False,
+                type=int,
+                location=OpenApiParameter.QUERY,
+            ),
+            OpenApiParameter(
+                name="price_max",
+                description="Максимальная цена",
+                required=False,
+                type=int,
+                location=OpenApiParameter.QUERY,
+            ),
+            OpenApiParameter(
+                name="mileage_min",
+                description="Минимальный пробег",
+                required=False,
+                type=int,
+                location=OpenApiParameter.QUERY,
+            ),
+            OpenApiParameter(
+                name="mileage_max",
+                description="Максимальный пробег",
+                required=False,
+                type=int,
+                location=OpenApiParameter.QUERY,
+            ),
+            # Добавьте другие параметры по необходимости
+        ],
+    ),
+    create=extend_schema(
+        summary="Создание новой машины.",
+    ),
+    update=extend_schema(
+        summary="Полное обновление данных о машине.",
+    ),
+    destroy=extend_schema(
+        summary="Удаление машины.",
+    ),
 )
 class CarViewSet(viewsets.ModelViewSet):
     """View для модели Car"""
